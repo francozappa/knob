@@ -198,8 +198,6 @@ hook_send_lmp:
 * Pair a vulnerable Bluetooth device with the Nexus 5
 * Start a connection from the Nexus 5
 * On Wireshark you should see that the slave accepted a connection with 1 byte
-    of entropy (like what happens from packet 121 to packet 127 in the  sample
-    capture that I've attached in the email)
-
-
+    of entropy (like what happens from packet 121 to packet 127 in
+    [this pcap file](https://github.com/francozappa/knob/blob/master/poc-internalblue/sample-nexmaster-galaxys9slave.pcapng).
 

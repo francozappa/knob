@@ -1,0 +1,19 @@
+# vim
+*.swp
+
+*~
+
+# compiled python
+*.pyc
+
+# ctags
+tags
+
+# internalblue
+_internalblue.hist
+_internalblue.log
+btsnoop.log
+
+build/
+dist/
+internalblue.egg-info

@@ -1,9 +1,61 @@
+# README
+
+## Requirements
+
+* Rooted Nexus 5 running the `internalblue/android_bluetooth_stack/nexus5_android6_0_1/bluetooth.default.so` Android Bluetooth stack
+
+* Laptop running a Linux based OS 
+
+* Wireshark
+    * Optionally install this
+        [LMP dissection plugin](https://github.com/demantz/lmp_wireshark_dissector) 
+        to easily follow the packet capture. 
+ 
+## Perform the KNOB attack
+
+1. Connect the Nexus 5 to your laptop via USB
+
+2. Install our modified internalblue v0.1 by cd'ing into
+    `internalblue` and running `sudo python2 setup.py install`
+
+3. Run `internalblue`
+
+4. Start LMP monitoring with `monitor lmp start`
+    * If you are running Arch Linux and you get `Error: unrecognized option -mthumb` 
+      you should close the wireshark window and `internalblue`, 
+      uncomment line `116` in `internalblue/internalblue/core.py` to trigger a
+      custom exception,  and restart from step 2 (installation)
+    * A wireshark window should pop up
+
+4. Pair a vulnerable Bluetooth device with the Nexus 5
+
+5. Start a connection **from the Nexus 5**. In other words the Nexus 5 has to be
+   the master and should send the first LMP packet. We have other internalblue
+   patches to perform the same attack when the Nexus 5 is the slave, it is
+   just a matter of sending the correct LMP packet format.
+
+6. On Wireshark you should see that the Nexus (Bluetooth master) negotiating encryption keys with 1 byte
+    of entropy (like what happens from packet 121 to packet 127 in
+    [our sample pcap file](https://github.com/francozappa/knob/blob/master/poc-internalblue/sample-nexmaster-galaxys9slave.pcapng).
+
+## FAQ
+
+### What should I do if I find a new vulnerable device
+
+Please let us know, such as we can update our evaluation results.
+
+### Wait, this is not an attack over the air
+
+This implementation of the KNOB attack does not require to use any SDR because
+we are patching the firmware of the Nexus 5 to obtain the same results of an
+attack over the air. 
+
+## OLD
+
 Assuming that internalblue v0.1 is installed and it is already tested on a rooted
 Nexus 5. The following patch works only if the nexus starts the Bluetooth
 BR/EDR connection as the master. We also have patches for the slave case.
 
-* Open `fw_5.py`
-* Change `LMP_MONITOR_BUFFER_BASE_ADDRESS` to `0xd7760`
 * Replace the value of `LMP_MONITOR_INJECTED_CODE` with the following string
     (excluding the asm code fence lines)
 
@@ -190,14 +242,4 @@ hook_send_lmp:
     pop  {r4,r5,r6,pc}  // restore saved registers and return
 """ % (LMP_MONITOR_BUFFER_BASE_ADDRESS, LMP_MONITOR_BUFFER_BASE_ADDRESS+0x40)
 ```
-
-* Start internalblue
-* Activate LMP monitoring
-    * A wireshark window should pop up
-    * Optionally install the LMP decoding plugin linked from internalblue's README
-* Pair a vulnerable Bluetooth device with the Nexus 5
-* Start a connection from the Nexus 5
-* On Wireshark you should see that the slave accepted a connection with 1 byte
-    of entropy (like what happens from packet 121 to packet 127 in
-    [this pcap file](https://github.com/francozappa/knob/blob/master/poc-internalblue/sample-nexmaster-galaxys9slave.pcapng).
 

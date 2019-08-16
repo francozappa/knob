@@ -112,6 +112,8 @@ class InternalBlue():
         context.log_level = 'critical'
         try:
             pwnlib.asm.which_binutils('as')     # throws PwnlibException if as cannot be found
+            # XXX: exception to trigger the Arch Linux pwnlib workaround
+            raise PwnlibException('Please let me use Arch Linux!')
             context.log_level = saved_loglevel
             return True
         except PwnlibException:

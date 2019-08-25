@@ -35,7 +35,8 @@ import random
 
 import hci
 
-NEXUS5_MODE = 'MASTER_MITM'
+# NEXUS5_MODE = 'MASTER_MITM'  # Nexus5 is the master and init the LMP session
+NEXUS5_MODE = 'SLAVE_MITM'  # Nexus5 is the slave and doesn't init the LMP session
 
 
 
@@ -455,6 +456,8 @@ class InternalBlue():
 
             if NEXUS5_MODE == 'MASTER_MITM':
                 import fw_5_master_mitm as fw
+            elif NEXUS5_MODE == 'SLAVE_MITM':
+                import fw_5_slave_mitm as fw
             else:
                 log.critical("Don't know {}. No fw imported".format(NEXUS5_MODE))
 

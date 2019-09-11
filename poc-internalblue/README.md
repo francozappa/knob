@@ -7,7 +7,7 @@
 * Laptop running a Linux based OS 
 
 * Wireshark
-    * Optionally install the [LMP dissection plugin](https://github.com/greatscottgadgets/libbtbb) 
+    * Optionally install the [LMP dissection plugin](https://github.com/francozappa/knob/tree/master/wireshark/lmp_wireshark_dissector) 
         and 
         [our LMP coloring rules](https://github.com/francozappa/knob/tree/master/wireshark)
         to easily follow the packet capture. I was able to install using Wireshark v2.6.10

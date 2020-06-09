@@ -8,6 +8,7 @@ Repository about the [Key Negotiation Of Bluetooth (KNOB)](https://knobattack.co
 * [Key Negotiation Downgrade Attacks on Bluetooth and Bluetooth Low Energy](https://francozappa.github.io/publication/knob-ble/) [TOPS20]
 * [Bluetooth blues: KNOB attack explained](https://francozappa.github.io/talk/cyberwire-knob/talk/) [CyberWire19]
 * [The KNOB is Broken: Exploiting Low Entropy in the Encryption Key Negotiation of Bluetooth BR/EDR](https://francozappa.github.io/publication/knob/) [SEC19]
+* [BIAS: Bluetooth Impersonatoin AttackS](https://francozappa.github.io/publication/bias/) [S&P20]
 
 ## Links
 

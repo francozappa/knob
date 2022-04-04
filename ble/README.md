@@ -8,7 +8,7 @@ victim is vulnerable to the KNOB attack on BLE
 * Download and unzip the kernel source code
 * Open `net/bluetooth/smp.c`
 * Set `SMP_DEV(hdev)->max_key_size = 7` (or any other value that you want to test)
-* Re-complie and install the kernel
+* Re-compile and install the kernel
 * Try to pair over BLE
 * Check in Wireshark that the SMP Pairing Request/Response from the patched
     device has `KeySize` equal to `7`
